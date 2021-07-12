@@ -7,11 +7,12 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  int _coins = 0;
+  int _pressCost = 1;
 
-  void _incrementCounter() {
+  void _plusCoins() {
     setState(() {
-      _counter++;
+      _coins += _pressCost;
     });
   }
 
@@ -19,28 +20,38 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
         title: Text('My clicker'),
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          //mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
+            Align(
+                alignment: FractionalOffset(0.3, 0.3),
+                child:Text(
+                    'Hello Flutter',
+                    textDirection: TextDirection.ltr,   // текст слева направо
+                    style: TextStyle(fontSize: 20) // высота шрифта 20
+                )
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+            Text('You have $_coins coins'),
+            SizedBox(
+              height: 90,
+              width: 160,
+              child: OutlinedButton(
+
+                onPressed: _plusCoins,
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Icon(Icons.add),
+                      Text('$_pressCost coin'),
+                      if (_pressCost != 1) Text('s')
+                    ]),
+              ),
             ),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
       ),
     );
   }
@@ -60,7 +71,10 @@ class _StartPageState extends State<StartPage> {
       ),
       body: Center(
           child: ElevatedButton(
-        style: ButtonStyle (backgroundColor: MaterialStateProperty.all<Color>(Colors.purpleAccent),),
+        style: ButtonStyle(
+          backgroundColor:
+              MaterialStateProperty.all<Color>(Colors.purpleAccent),
+        ),
         child: Text('Press to start'),
         onPressed: () {
           Navigator.push(
