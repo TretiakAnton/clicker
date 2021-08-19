@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart';
 import 'dart:ui';
+
+import 'package:flutter/material.dart';
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -26,33 +27,25 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           //mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            Align(
-                alignment: FractionalOffset(0.3, 0.3),
-                child:Text(
-                    'Hello Flutter',
-                    textDirection: TextDirection.ltr,   // текст слева направо
-                    style: TextStyle(fontSize: 20) // высота шрифта 20
-                )
-            ),
+            Align(alignment: FractionalOffset(0.3, 0.3)),
             Text('You have $_coins coins'),
             SizedBox(
               height: 90,
               width: 160,
               child: OutlinedButton(
-
                 onPressed: _plusCoins,
                 child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Icon(Icons.add),
-                      Text('$_pressCost coin'),
-                      if (_pressCost != 1) Text('s')
+                      if (_pressCost != 1) Text('$_pressCost coins')else Text('$_pressCost coin')
                     ]),
               ),
             ),
           ],
         ),
       ),
+      bottomNavigationBar: BottomAppBar(),
     );
   }
 }
