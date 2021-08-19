@@ -1,15 +1,60 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+
 int _coins = 0;
-int _crystals=0;
+int _crystals = 0;
+
+class StartPage extends StatefulWidget {
+  @override
+  _StartPageState createState() => _StartPageState();
+}
+
+class _StartPageState extends State<StartPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          'Welcome to "My clicker"',
+          textAlign: TextAlign.center,
+        ),
+      ),
+      body: Center(
+          child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text('Are you ready to start?',style: TextStyle(fontSize: 20,)),
+          Placeholder(
+            fallbackHeight: 40,
+          ),
+          SizedBox(
+            height: 100,
+            width: 250,
+            child: ElevatedButton(
+              style: ButtonStyle(
+                backgroundColor:
+                    MaterialStateProperty.all<Color>(Colors.purpleAccent),
+              ),
+              child: Text('Press to start',style: TextStyle(fontSize: 20)),
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => MyHomePage()));
+              },
+            ),
+          ),
+        ],
+      )),
+    );
+  }
+}
+
 class MyHomePage extends StatefulWidget {
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   int _pressCost = 1;
 
   void _plusCoins() {
@@ -59,50 +104,34 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      bottomNavigationBar: BottomAppBar(child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-        IconButton(
-          icon: Icon(Icons.upload_sharp),
-          onPressed: null,
-        ),
-        IconButton(
-          icon: Icon(Icons.home),
-          onPressed: () => print('people'),
-        ),
-        IconButton(
-          icon: Icon(Icons.directions_car_sharp),
-          onPressed: () => print('ac_unit'),
-        ),
-      ]),
+      bottomNavigationBar: BottomAppBar(
+        child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+          IconButton(
+            icon: Icon(Icons.upload_sharp),
+            onPressed: null,
+          ),
+          IconButton(
+            icon: Icon(Icons.home),
+            onPressed: () => print('people'),
+          ),
+          IconButton(
+            icon: Icon(Icons.directions_car_sharp),
+            onPressed: () => print('ac_unit'),
+          ),
+        ]),
       ),
     );
   }
 }
 
-class StartPage extends StatefulWidget {
+class UpgradePage extends StatefulWidget {
   @override
-  _StartPageState createState() => _StartPageState();
+  _UpgradePageState createState() => _UpgradePageState();
 }
 
-class _StartPageState extends State<StartPage> {
+class _UpgradePageState extends State<UpgradePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Welcome to "My clicker"', textAlign: TextAlign.center,),
-
-      ),
-      body: Center(
-          child: ElevatedButton(
-        style: ButtonStyle(
-          backgroundColor:
-              MaterialStateProperty.all<Color>(Colors.purpleAccent),
-        ),
-        child: Text('Press to start'),
-        onPressed: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => MyHomePage()));
-        },
-      )),
-    );
+    return Scaffold();
   }
 }
