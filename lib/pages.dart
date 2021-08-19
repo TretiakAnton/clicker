@@ -1,14 +1,15 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-
+int _coins = 0;
+int _crystals=0;
 class MyHomePage extends StatefulWidget {
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _coins = 0;
+
   int _pressCost = 1;
 
   void _plusCoins() {
@@ -25,27 +26,54 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Center(
         child: Column(
-          //mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
-            Align(alignment: FractionalOffset(0.3, 0.3)),
-            Text('You have $_coins coins'),
+            Text('You have $_coins coins and $_crystals crystals'),
             SizedBox(
-              height: 90,
-              width: 160,
-              child: OutlinedButton(
-                onPressed: _plusCoins,
+              height: 50,
+              width: 150,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadiusDirectional.circular(45)),
+                  primary: Colors.deepOrangeAccent[100],
+                  onPrimary: Colors.purple,
+                  elevation: 30,
+                  shadowColor: Colors.blueAccent,
+                  minimumSize: Size(50, 80),
+                  side: BorderSide(color: Colors.white30, width: 3),
+                  animationDuration: Duration(milliseconds: 700),
+                ),
+                onPressed: () => _plusCoins(),
                 child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Icon(Icons.add),
-                      if (_pressCost != 1) Text('$_pressCost coins')else Text('$_pressCost coin')
+                      if (_pressCost != 1)
+                        Text('$_pressCost coins')
+                      else
+                        Text('$_pressCost coin')
                     ]),
               ),
             ),
           ],
         ),
       ),
-      bottomNavigationBar: BottomAppBar(),
+      bottomNavigationBar: BottomAppBar(child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+        IconButton(
+          icon: Icon(Icons.upload_sharp),
+          onPressed: null,
+        ),
+        IconButton(
+          icon: Icon(Icons.home),
+          onPressed: () => print('people'),
+        ),
+        IconButton(
+          icon: Icon(Icons.directions_car_sharp),
+          onPressed: () => print('ac_unit'),
+        ),
+      ]),
+      ),
     );
   }
 }
@@ -60,7 +88,8 @@ class _StartPageState extends State<StartPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Welcome to "My clicker"'),
+        title: Text('Welcome to "My clicker"', textAlign: TextAlign.center,),
+
       ),
       body: Center(
           child: ElevatedButton(
